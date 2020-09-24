@@ -27,16 +27,38 @@ def calcs():
     except NameError:
         return
 
-    print("The sum is", x + y)
+    print(x, "+", y, "=", x + y)
     if x < y:
-        print("The difference is", y - x)
+        print(x, "<- distance ->", y, "is", y - x)
     else:
-        print("The difference is", x - y)
-    print("Division:", x / y)
-    print("Multiplication:", x * y)
+        print(x, "<- distance ->", y, "is", x - y)
+    print(x, "/", y, "=", x / y)
+    print(x, "*", y, "=", x * y)
 
 def readcsv():
-    print("open stuff...\nDo stuff...\ninsert bugs.........")
+    path = input("Please enter the path to your file > ").strip(' \'"')
+    print(path)
+    if path in quitli:
+        return
+    elif path in helpli:
+        print("""To save your file path,
+just right click your file while holding down shift
+then click on 'Copy as path' and paste it in here.
+Or type 'exit' to leave""")
+        readcsv()
+    elif path[-4:] != ".csv":
+        print("""Please only csv files!
+I have no Idea what harmful things could happen,
+if the program tried to open other file types.""")
+        print(path)
+        readcsv()
+        return
+    print("opening...")
+    file = open(path, "r")
+    if file.mode == "r":
+        print("reading...")
+        file.content = file.read()
+        print(file.content)
 
 def help():
     print("--- H - E - L - P ---")
@@ -74,4 +96,26 @@ def intro():
 
     terminal()
 
-intro()
+if True:
+    intro()
+else:
+    from time import sleep
+    sleep(1)
+    print(".", end=" ")
+    sleep(.5)
+    print(".", end=" ")
+    sleep(.5)
+    print(".", end="")
+    sleep(.5)
+    print()
+    sleep(1)
+    print("if you see this, something went horribly wrong")
+    sleep(2)
+    print("initiating self destruct...")
+    sleep(2)
+    print(3)
+    sleep(1)
+    print(2)
+    sleep(1)
+    print(1)
+    sleep(1)
