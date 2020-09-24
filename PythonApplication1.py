@@ -1,7 +1,7 @@
 calcsli = ["c", "cal", "calc", "calcs", "calculator", "calculation", "calculations", "calculate", "1", "calcs()"]
 readcsvli = ["csv", "readcsv", "2", "readcsv()"]
 helpli = ["h", "help", "what", "?", "help()", "cmd", "cmds", "cmdlist"]
-quitli = ["exit", "quit", "bye", "godbye", "goodbye", "cya", "fuck off"]
+quitli = ["exit", "quit", "bye", "godbye", "goodbye", "cya", "no", "fuck off"]
 
 def calcs():
     """plus and minus with two numbers"""
@@ -29,9 +29,9 @@ def calcs():
 
     print(x, "+", y, "=", x + y)
     if x < y:
-        print(x, "<- distance ->", y, "is", y - x)
+        print(y, "-", x, "is", y - x)
     else:
-        print(x, "<- distance ->", y, "is", x - y)
+        print(x, "-", y, "is", x - y)
     print(x, "/", y, "=", x / y)
     print(x, "*", y, "=", x * y)
 
@@ -95,6 +95,7 @@ def intro():
     print("Hello, would you like to calculate numbers or read a CSV file?")
 
     terminal()
+
 
 if True:
     intro()
