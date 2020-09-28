@@ -6,3 +6,4 @@ What can it do?
    - but... this -> 1.2 - 1.0 = 0.199999999999999996
  - read a csv file
    - but do nothing with it, yet...
+ - im editing... description may or may not be accurate
