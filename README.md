@@ -4,6 +4,6 @@ What can it do?
 
  - make calculations with user input numbers
    - but... this -> 1.2 - 1.0 = 0.199999999999999996
- - read a csv file
+ - print out a file to the console
    - but do nothing with it, yet...
- - im editing... description may or may not be accurate
+ - slots
