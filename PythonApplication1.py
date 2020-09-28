@@ -72,28 +72,27 @@ def slots():
     print('Welcome to "Slots", try "help", if you dont know what to do.\n')
     slinput = input("slots > ").lower().strip()
     if slinput in slotsli:
-        print("    ┏━━━┳━━━┳━━━┓")
+        print("    ╔═══╤═══╤═══╗")
         for i in range(0, randint(12, 15)):
             sleep(.1)
             a = b = c = symbols[randint(0, len(symbols)-1)]
             #b = symbols[randint(0, len(symbols)-1)]
             #c = symbols[randint(0, len(symbols)-1)]
-            print("    ┃", a, "┃", b, "┃", c, "┃", end="\r")
+            print("    ║", a, "│", b, "│", c, "║", end="\r")
         for j in range(0, randint(12, 15)):
             sleep(.1)
             b = c = symbols[randint(0, len(symbols)-1)]
             #c = symbols[randint(0, len(symbols)-1)]
-            print("    ┃", a, "┃", b, "┃", c, "┃", end="\r")
+            print("    ║", a, "│", b, "│", c, "║", end="\r")
         for k in range(0, randint(12, 15)):
             sleep(.1)
             c = symbols[randint(0, len(symbols)-1)]
-            print("    ┃", a, "┃", b, "┃", c, "┃", end="\r")
-        print("\n", i)
+            print("    ║", a, "│", b, "│", c, "║", end="\r")
         if a == b and b == c:
-            print("loool\n")
+            print("\n")
         elif a == b or a == c or b == c:
             sleep(1)
-            print("lool\n")
+            print("uno momento de bruh\n")
     elif slinput in helpli:
         print("    slots:", slotsli[:5])
         print("    slots [amount] to use the slot machine")
