@@ -1,30 +1,26 @@
 from time import sleep
 
+# command aliases
 cmds = {
     "calcs": ["calcs", "calc", "cal", "calclist", "calcli", "calculations", "calculate"],
     "printfile" : ["printfile", "read", "print", "file", "readfile"],
     "slots": ["slots", "slot", "sl"],
-    "help": ["help", "h", "?", "commands", "cmds", "commandlist", "commandli", "cmdlist", "cmdli"],
+    "help": ["help", "h", "?", "commands", "cmds", "commandlist", "commandli", "cmdlist", "cmdli", "info"],
     "exit": ["exit", "quit", "end"]
     }
 
+# command descriptions
 cmdesc = {
-    "calcs": ["This command prints the calculations' +, -, * and / ' between two numbers",
-              ["calcs", "calc", "cal", "calclist", "calcli", "calculations", "calculate"]],
-
-    "printfile" : ["This command prints the content of a file with a given path",
-                   ["printfile", "read", "print", "file", "readfile"]],
-
-    "slots": ["You can play slots with this command (WIP)", ["slots", "slot", "sl"]],
-
-    "help": ["""This command shows the aliases of either all commands
-    or more detailed help on a single command, if you provide the name""",
-             ["help", "h", "?", "commands", "cmds", "commandlist", "commandli", "cmdlist", "cmdli"]],
-
-    "exit": ["Guess what this command does...", ["exit", "quit", "end"]]
+    "calcs": "This command prints the calculations' +, -, * and / ' between two numbers",
+    "printfile" : "This command prints the content of a file with a given path",
+    "slots": "You can play slots with this command (WIP)",
+    "help": """This command shows the aliases of either all commands or
+more detailed help on a single command, if you provide the name""",
+    "egg": "No eggs. Don't look for them. There are no eggs",
+    "exit": "Guess what this command does..."
     }
 
-ver = "'beta 1.1'"
+version = "'beta 1.2'"
 
 bal = 1000
 
@@ -65,7 +61,7 @@ def whatcmd(cmdstr):
         elif cmd in cmds["printfile"]: printfile(args)
         elif cmd in cmds["slots"]:         slots(args)
         elif cmd in cmds["help"]:           help(args)
-        elif cmd == "info": (print("Version:", ver, end="\n> "), sleep(2), typewrite("\rMaybe I'll be a discord bot one day..."), sleep(0.5), typewrite("...", delay=0.3), sleep(0.5), typewrite("WAIT THATS BAD..."), sleep(0.5), typewrite("or is it?", delay=0.1, end="\n\n"))
+        elif cmd in     ["egg"]: (print("", end="\n> "), sleep(2), typewrite("\rMaybe I'll be a discord bot one day..."), sleep(0.5), typewrite("...", delay=0.3), sleep(0.5), typewrite("WAIT THATS BAD..."), sleep(0.5), typewrite("or is it?", delay=0.1, end="\n\n"))
         elif cmd in cmds["exit"]:
             return (typewrite("Goodbye!", delay=0.1), sleep(1))
 
@@ -164,6 +160,7 @@ def slots(args):
     for i in range(0, randint(12, 15)):
         c = symbols[randint(0, len(symbols)-1)]
         print("\r    ║", a, "│", b, "│", c, "║", end="")
+        sleep(0.1)
     print("\n    ╚═══╧═══╧═══╝")
     sleep(1)
 
@@ -182,7 +179,9 @@ def slots(args):
 
 def help(args):
     if len(args) == 1:
-        print("\n--- H - E - L - P ---\n")
+        print("--- H - E - L - P ---")
+        sleep(0.1)
+        print("Version:", version, end="\n\n")
         sleep(0.1)
         print("Here are all comands and their aliases:")
         sleep(0.1)
@@ -192,18 +191,20 @@ def help(args):
         print("    slots:", cmds["slots"])
         print("     exit:", cmds["exit"])
         print()
-    elif args[1] in cmdesc["help"][1]:      helpdesc(cmdesc["help"])
-    elif args[1] in cmdesc["calcs"][1]:     helpdesc(cmdesc["calcs"])
-    elif args[1] in cmdesc["printfile"][1]: helpdesc(cmdesc["printfile"])
-    elif args[1] in cmdesc["slots"][1]:     helpdesc(cmdesc["slot"])
-    elif args[1] in cmdesc["exit"][1]:      helpdesc(cmdesc["exit"]) 
+    elif args[1] in cmds["help"]:      helpdesc("help")
+    elif args[1] in cmds["calcs"]:     helpdesc("calcs")
+    elif args[1] in cmds["printfile"]: helpdesc("printfile")
+    elif args[1] in cmds["slots"]:     helpdesc("slot")
+    elif args[1] in     ["egg"]:       helpdesc("egg")
+    elif args[1] in cmds["exit"]:      helpdesc("exit") 
     else:
         typewrite("This command does not exist")
 
 def helpdesc(key):
-    typewrite(key[0])
-    print("Aliases for this command:")
-    print("   ", key[1])
+    typewrite(cmdesc[key])
+    if key in cmds:
+        print("Aliases for this command:")
+        print("   ", cmds[key])
 
 
 
