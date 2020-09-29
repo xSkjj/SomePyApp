@@ -30,7 +30,7 @@ bal = 1000
 
 
 
-def typewrite(*value, delay=0.02, sep=" ", end="\n"):
+def typewrite(*value, delay=0.015, sep=" ", end="\n"):
     r"""typewrite(value, delay=0.02, sep=" ", end="\n")
 
 Prints the given values with a delay between each character.
@@ -125,17 +125,20 @@ if the program tried to open other file types.""")
 
 
 def slots(args):
-    amt = "0"
+    global bal
+    amt = None
     # did user specify an amount?
     try:
         args[1]
     except:
-        typewrite("How many credits would you like to use?")
-        print(cmdline()) #.split().insert(0, "slots")
+        typewrite("How much credits would you like to use?")
+        args.append(cmdline().split()[0])
     # check if amt can be an int. if True, assign the value to amt
     # don't if user doesn't have enough credits
     try:
         amt = int(args[1])
+        if amt > bal:
+            return typewrite("You don't have enough credits.")
     except:
         try:
             float(amt)
@@ -143,11 +146,11 @@ def slots(args):
         except:
             return print("Amount is not a number")
     from random import randint
-    global bal
 
     symbols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "!", "$", "%", "&", "?", "#"]
 
     print("--- S - L - O - T - S ---\n")
+    bal -= amt
     print("Balance:", bal)
     print("    ╔═══╤═══╤═══╗")
     for i in range(0, randint(12, 15)):
@@ -169,19 +172,15 @@ def slots(args):
 
     if a == b and b == c:
         print("BIG WIN, Pog MOMENT")
-        bal -= amt
         bal += amt*100
         typewrite("You spent", amt, "and won", amt*100, "!!!")
     elif a == b or a == c or b == c:
         typewrite("POGGERS", delay=0.03)
-        bal -= amt
         bal += amt*10
         typewrite("You spent", amt, "and won", amt*10, "!", delay=0.03)
 
     else:
         typewrite("uno momento de bruh", delay=0.05)
-        bal -= amt
-
         typewrite("You spent", amt, "and lost everything.", delay=0.05)
     typewrite("Your balance is now", bal)
 
