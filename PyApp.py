@@ -171,16 +171,13 @@ def slots(args):
     print("\n    ╚═══╧═══╧═══╝")
 
     if a == b and b == c:
-        print("BIG WIN, Pog MOMENT")
         bal += amt*100
         typewrite("You spent", amt, "and won", amt*100, "!!!")
     elif a == b or a == c or b == c:
-        typewrite("POGGERS", delay=0.03)
         bal += amt*10
         typewrite("You spent", amt, "and won", amt*10, "!", delay=0.03)
 
     else:
-        typewrite("uno momento de bruh", delay=0.05)
         typewrite("You spent", amt, "and lost everything.", delay=0.05)
     typewrite("Your balance is now", bal)
 
