@@ -29,19 +29,24 @@ ver = "'beta 1.0'"
 bal = 1000
 
 
-def typewrite(value, delay=0.02, end="\n"):
-    """typewrite(value, delay, end)
 
-Type a given value with a delay between each character.
-This creates a nice typewrite effect.
+def typewrite(*value, delay=0.02, sep=" ", end="\n"):
+    r"""typewrite(value, delay=0.02, sep=" ", end="\n")
+
+Prints the given values with a delay between each character.
+This creates a nice typewriter effect.
 
     value: the value you want to have typed out
-    delay: the delay between each character in seconds, default: 0.05
+    delay: the delay between each character in seconds, default: 0.02 seconds
+    sep: string inserted between values, default: a space
     end: string appended after the last value, default: a newline"""
 
-    for c in str(value):
-        sleep(delay)
-        print(c, end="")
+    for elm in value:
+        for c in str(elm):
+            sleep(delay)
+            print(c, end="")
+        if elm != value[-1]:
+            print(end=sep)
     sleep(delay)
     print(end=end)
 
@@ -60,12 +65,12 @@ def whatcmd(cmdstr):
         elif cmd in cmds["printfile"]: printfile(args)
         elif cmd in cmds["slots"]:         slots(args)
         elif cmd in cmds["help"]:           help(args)
-        elif cmd == "info": (print("Version:", ver, end="\n> "), sleep(2), typewrite("\rMaybe I'll be a discord bot one day..."), sleep(0.5), typewrite("...", 0.3), sleep(0.5), typewrite("WAIT THATS BAD..."), sleep(0.5), typewrite("or is it?", 0.1, "\n\n"))
+        elif cmd == "info": (print("Version:", ver, end="\n> "), sleep(2), typewrite("\rMaybe I'll be a discord bot one day..."), sleep(0.5), typewrite("...", delay=0.3), sleep(0.5), typewrite("WAIT THATS BAD..."), sleep(0.5), typewrite("or is it?", delay=0.1, end="\n\n"))
         elif cmd in cmds["exit"]:
-            return (typewrite("Goodbye!", 0.1), sleep(1))
+            return (typewrite("Goodbye!", delay=0.1), sleep(1))
 
         else: 
-            typewrite("I'm sorry, I don't know what you want. Try 'help'.", 0.01)
+            typewrite("I'm sorry, I don't know what you want. Try 'help'.")
 
     whatcmd(cmdline())
 
@@ -74,7 +79,7 @@ def whatcmd(cmdstr):
 def declicalcs(args):
     if len(args) == 1:
         typewrite("Which numbers would you like to use?")
-        declicalcs(cmdline().split().insert(0, "calcs")) # problem here, at slots prob too...
+        (cmdline()).split().insert(0, "calcs")
     elif len(args) == 2:
         typewrite("You need to use two numbers.")
     else:
@@ -120,57 +125,65 @@ if the program tried to open other file types.""")
 
 
 def slots(args):
-    typewrite("This is still WIP")
+    amt = "0"
+    # did user specify an amount?
     try:
-        amt = args[1]
+        args[1]
     except:
-        print("How credits would you like to use?")
-        slots(cmdline().split().insert(0, "slots"))
+        typewrite("How many credits would you like to use?")
+        print(cmdline()) #.split().insert(0, "slots")
+    # check if amt can be an int. if True, assign the value to amt
+    # don't if user doesn't have enough credits
     try:
-        if int(amt) > bal:
-            typewrite("You don't have enough credits")
-            return
+        amt = int(args[1])
     except:
         try:
             float(amt)
-            print("Amount must be a whole number")
+            return print("Amount must be a whole number")
         except:
-            print("Amount is not a number")
+            return print("Amount is not a number")
     from random import randint
+    global bal
 
     symbols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "!", "$", "%", "&", "?", "#"]
 
     print("--- S - L - O - T - S ---\n")
+    print("Balance:", bal)
     print("    ╔═══╤═══╤═══╗")
     for i in range(0, randint(12, 15)):
-        sleep(.1)
         a = b = c = symbols[randint(0, len(symbols)-1)]
         print("\r    ║", a, "│", b, "│", c, "║", end="")
+        #print("\r    ╚═══╧═══╧═══╝", end="")
+        sleep(0.1)
     for j in range(0, randint(12, 15)):
-        sleep(.1)
         b = c = symbols[randint(0, len(symbols)-1)]
         print("\r    ║", a, "│", b, "│", c, "║", end="")
+        #print("\r    ╚═══╧═══╧═══╝", end="")
+        sleep(0.1)
     for k in range(0, randint(12, 15)):
-        sleep(.1)
         c = symbols[randint(0, len(symbols)-1)]
         print("\r    ║", a, "│", b, "│", c, "║", end="")
+        #print("\r    ╚═══╧═══╧═══╝", end="")
+        sleep(0.1)
+    print("\n    ╚═══╧═══╧═══╝")
 
     if a == b and b == c:
-        print("BIG WIN, Pog MOMENT\n")
+        print("BIG WIN, Pog MOMENT")
         bal -= amt
-        bal += amt**2
-        typewrite("You spent", amt, "and won", amt**2, "!!!")
-
+        bal += amt*100
+        typewrite("You spent", amt, "and won", amt*100, "!!!")
     elif a == b or a == c or b == c:
-        print("uno momento de bruh\n")
+        typewrite("POGGERS", delay=0.03)
         bal -= amt
-        bal += amt*2
-        typewrite("You spent", amt, "and won", amt*2, "!")
+        bal += amt*10
+        typewrite("You spent", amt, "and won", amt*10, "!", delay=0.03)
 
     else:
+        typewrite("uno momento de bruh", delay=0.05)
         bal -= amt
-        typewrite("You spent", amt, "and lost everything.")
-        typewrite("Dumbass\r       \r", 0.01)
+
+        typewrite("You spent", amt, "and lost everything.", delay=0.05)
+    typewrite("Your balance is now", bal)
 
 
 
@@ -204,7 +217,7 @@ def helpdesc(key):
 
 # start the program
 
-typewrite("Hello.", 0.05, " ")
+typewrite("Hello.", delay=0.05, end=" ")
 sleep(0.2)
 
 typewrite("What would you like to do?")
