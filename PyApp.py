@@ -142,9 +142,9 @@ def slots(args):
     except:
         try:
             float(amt)
-            return print("Amount must be a whole number")
+            return print("Amount must be a whole number.")
         except:
-            return print("Amount is not a number")
+            return print("Amount is not a number.")
     from random import randint
 
     symbols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "!", "$", "%", "&", "?", "#"]
