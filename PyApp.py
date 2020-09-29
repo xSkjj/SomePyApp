@@ -24,7 +24,7 @@ cmdesc = {
     "exit": ["Guess what this command does...", ["exit", "quit", "end"]]
     }
 
-ver = "'beta 1.0'"
+ver = "'beta 1.1'"
 
 bal = 1000
 
