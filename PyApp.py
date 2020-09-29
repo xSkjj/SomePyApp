@@ -146,9 +146,9 @@ def slots(args):
         except:
             return print("Amount is not a number.")
     from random import randint
-
+    
     symbols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "!", "$", "%", "&", "?", "#"]
-
+    
     print("--- S - L - O - T - S ---\n")
     bal -= amt
     print("Balance:", bal)
@@ -156,26 +156,23 @@ def slots(args):
     for i in range(0, randint(12, 15)):
         a = b = c = symbols[randint(0, len(symbols)-1)]
         print("\r    ║", a, "│", b, "│", c, "║", end="")
-        #print("\r    ╚═══╧═══╧═══╝", end="")
         sleep(0.1)
-    for j in range(0, randint(12, 15)):
+    for i in range(0, randint(12, 15)):
         b = c = symbols[randint(0, len(symbols)-1)]
         print("\r    ║", a, "│", b, "│", c, "║", end="")
-        #print("\r    ╚═══╧═══╧═══╝", end="")
         sleep(0.1)
-    for k in range(0, randint(12, 15)):
+    for i in range(0, randint(12, 15)):
         c = symbols[randint(0, len(symbols)-1)]
         print("\r    ║", a, "│", b, "│", c, "║", end="")
-        #print("\r    ╚═══╧═══╧═══╝", end="")
-        sleep(0.1)
     print("\n    ╚═══╧═══╧═══╝")
+    sleep(1)
 
     if a == b and b == c:
         bal += amt*100
         typewrite("You spent", amt, "and won", amt*100, "!!!")
     elif a == b or a == c or b == c:
-        bal += amt*10
-        typewrite("You spent", amt, "and won", amt*10, "!", delay=0.03)
+        bal += amt*3
+        typewrite("You spent", amt, "and won", amt*3, "!", delay=0.03)
 
     else:
         typewrite("You spent", amt, "and lost everything.", delay=0.05)
