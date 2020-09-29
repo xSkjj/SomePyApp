@@ -88,7 +88,7 @@ def declicalcs(args):
                 typewrite("Invalid input")
 
 def listcalcs(x, y):
-    """the four normal calculations with two numbers"""
+    """Print a list of four calculations between two numbers which use the operators '+', '-', '*' and '/'"""
     print(x, "+", y, "=", round(x + y, 12))
     print(x, "-", y, "=", round(x - y, 12))
     print(x, "*", y, "=", round(x * y, 12))
@@ -98,10 +98,19 @@ def listcalcs(x, y):
 
 
 def printfile(args):
-    path = " ".join(args[1:])
+    # check if user specified a path, if not, ask
+    try:
+        args[1]
+    except:
+        typewrite("What is the Path to your file?")
+        args.append(cmdline())
+
+    print(args)
+    path = " ".join(args[1:]).strip(" \"'")
+    print(path)
     exts = ["csv", "txt"]
     if path.split(".")[-1] not in exts:
-        print("""Please only""", " & ".join(ext), """files!
+        print("""Please only""", " and ".join(exts), """files!
 I have no Idea what harmful things could happen,
 if the program tried to open other file types.""")
         return
@@ -116,14 +125,15 @@ if the program tried to open other file types.""")
         print("reading...")
         file.content = file.read()
         print(file.content)
-        print("That's it... That's all it can do so far...")
+        typewrite("That's it...", delay=0.05)
+        typewrite("That's all it can do so far...")
 
 
 
 def slots(args):
     global bal
     amt = None
-    # did user specify an amount?
+    # check if user specified a second argument, if not, ask
     try:
         args[1]
     except:
@@ -138,16 +148,18 @@ def slots(args):
     except:
         try:
             float(amt)
-            return print("Amount must be a whole number.")
+            return typewrite("Amount must be a whole number.")
         except:
-            return print("Amount is not a number.")
+            if args[1] in ["bal", "balance", "credits"]:
+                return typewrite("Your balance:", bal)
+            else:
+                return typewrite("Amount is not a number.")
     from random import randint
     
     symbols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "!", "$", "%", "&", "?", "#"]
     
     print("--- S - L - O - T - S ---\n")
     bal -= amt
-    print("Balance:", bal)
     print("    ╔═══╤═══╤═══╗")
     for i in range(0, randint(12, 15)):
         a = b = c = symbols[randint(0, len(symbols)-1)]
@@ -173,7 +185,6 @@ def slots(args):
 
     else:
         typewrite("You spent", amt, "and lost everything.", delay=0.05)
-    typewrite("Your balance is now", bal)
 
 
 
