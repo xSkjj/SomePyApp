@@ -26,7 +26,7 @@ bal = 1000
 
 
 # typewriter effect
-def typewrite(*value, delay=0.015, sep=" ", end="\n"):
+def typewrite(*value, delay=0.02, sep=" ", end="\n"):
     r"""typewrite(value, delay=0.02, sep=" ", end="\n")
 
 Prints the given values with a delay between each character.
@@ -37,11 +37,11 @@ This creates a nice typewriter effect.
     sep: string inserted between values, default: a space
     end: string appended after the last value, default: a newline"""
 
-    for elm in value:
-        for c in str(elm):
+    for i in range(len(value)):
+        for c in str(value[i]):
             sleep(delay)
             print(c, end="")
-        if elm != value[-1]:
+        if i != len(value) -1:
             print(end=sep)
     sleep(delay)
     print(end=end)
@@ -52,6 +52,7 @@ def cmdline():
     return input("> ").lower().strip()
 
 def whatcmd(cmdstr):
+    """Figure out what command was typed in cmdline"""
     if cmdstr is not "":
         args = cmdstr.split()
         cmd = args[0]
@@ -61,7 +62,7 @@ def whatcmd(cmdstr):
         elif cmd in cmds["printfile"]: printfile(args)
         elif cmd in cmds["slots"]:         slots(args)
         elif cmd in cmds["help"]:           help(args)
-        elif cmd in     ["egg"]: (print("", end="\n> "), sleep(2), typewrite("\rMaybe I'll be a discord bot one day..."), sleep(0.5), typewrite("...", delay=0.3), sleep(0.5), typewrite("WAIT THATS BAD..."), sleep(0.5), typewrite("or is it?", delay=0.1, end="\n\n"))
+        elif cmd in     ["egg"]:      (typewrite("I'm sorry, I don't know what you want. Try 'help'."), print("", end="> "), sleep(2), typewrite("\rMaybe I'll be a discord bot one day...", end=""), sleep(1), print("\r                                      \r", end=""), typewrite("...", delay=0.3, end=""), sleep(1), print("\r   \r", end=""), typewrite("WAIT THATS BAD...", end=""), sleep(1), print("\r                 \r", end=""), typewrite("or is it?", delay=0.1, end=""), sleep(1), print("\r         \r", end=""))
         elif cmd in cmds["exit"]:
             return (typewrite("Goodbye!", delay=0.1), sleep(1))
 
