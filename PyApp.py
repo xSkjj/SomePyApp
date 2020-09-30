@@ -25,7 +25,7 @@ version = "'beta 1.2'"
 bal = 1000
 
 
-
+# typewriter effect
 def typewrite(*value, delay=0.015, sep=" ", end="\n"):
     r"""typewrite(value, delay=0.02, sep=" ", end="\n")
 
