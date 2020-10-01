@@ -1,4 +1,4 @@
-from time import sleep
+﻿from time import sleep
 
 # command aliases
 cmds = {
@@ -40,9 +40,9 @@ This creates a nice typewriter effect.
     for i in range(len(value)):
         for c in str(value[i]):
             sleep(delay)
-            print(c, end="")
+            print(c, end="", flush=True)
         if i != len(value) -1:
-            print(end=sep)
+            print(end=sep, flush=True)
     sleep(delay)
     print(end=end)
 
@@ -222,6 +222,7 @@ def helpdesc(key):
 
 
 # start the program
+sleep(1)
 
 typewrite("Hello.", delay=0.05, end=" ")
 sleep(0.2)
