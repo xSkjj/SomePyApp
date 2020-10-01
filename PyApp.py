@@ -1,4 +1,3 @@
-﻿from time import sleep
 from time import sleep
 
 # command aliases
