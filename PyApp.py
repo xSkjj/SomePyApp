@@ -128,6 +128,7 @@ if the program tried to open other file types.""")
         print(file.content)
         typewrite("That's it...", delay=0.05)
         typewrite("That's all it can do so far...")
+    file.close()
 
 
 
