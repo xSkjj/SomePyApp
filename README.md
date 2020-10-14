@@ -8,5 +8,5 @@ What can it do?
    - but do nothing with it, yet...
  - slots
 
-This was a school project. I was supposed to make a simple slots program in the console.
+This was a school project. I was supposed to make a simple slots program using the console.
 I might have gone a little bit off track...
